@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.upweup</groupId>
+    <artifactId>upweup</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>uwu-common</module>
+        <module>uwu-study</module>
+        <module>uwu-user</module>
+        <module>uwu-order</module>
+    </modules>
+
+    <name>upweup</name>
+    <url>https://www.upweup.com</url>
+    <description>"一起上"系统</description>
+
+    <properties>
+        <upweup.version>1.0-SNAPSHOT</upweup.version>
+        <java.version>1.8</java.version>
+        <tomcat.version>9.0.64</tomcat.version>
+        <spring-boot.version>2.6.15</spring-boot.version>
+        <spring-cloud.version>3.1.1</spring-cloud.version>
+        <spring-cloud-year.version>2021.0.5</spring-cloud-year.version>
+        <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
+        <mybatis-plus.version>3.5.3</mybatis-plus.version>
+        <mybatis.version>3.5.10</mybatis.version>
+        <netty.version>4.1.67.Final</netty.version>
+        <druid.version>1.2.16</druid.version>
+        <pagehelper.version>5.3.2</pagehelper.version>
+        <fastjson2.version>2.0.25</fastjson2.version>
+        <fastjosn.version>1.2.47</fastjosn.version>
+        <minio.version>8.2.2</minio.version>
+        <hutool.version>5.8.11</hutool.version>
+        <lombok.version>1.18.24</lombok.version>
+        <kaptcha.version>2.3.3</kaptcha.version>
+        <commons.io.version>2.11.0</commons.io.version>
+        <velocity.version>2.3</velocity.version>
+        <dynamic-ds.version>3.5.2</dynamic-ds.version>
+        <commons-fileupload.version>1.5</commons-fileupload.version>
+        <poi.version>4.1.2</poi.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <mapstruct.version>1.5.3.Final</mapstruct.version>
+        <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+        <transmittable-thread-local.version>2.14.2</transmittable-thread-local.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+    <!-- 一般来说父级项目的packaging都为pom，packaging默认类型jar类型-->
+    <packaging>pom</packaging>
+
+    <!-- 锁定版本 -->
+    <dependencyManagement>
+        <dependencies>
+            <!--https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/2.3.3.RELEASE-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies/Hoxton.SR8-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-year.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-alibaba-dependencies/2.2.1.RELEASE-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Mybatis-Plus 依赖配置 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <!-- pageHelper 分页插件 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.mybatis</groupId>
+                        <artifactId>mybatis</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.mybatis</groupId>
+                        <artifactId>mybatis-spring</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.github.jsqlparser</groupId>
+                        <artifactId>jsqlparser</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <!-- mapstruct 转换器 -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+            <!-- 验证码 -->
+            <dependency>
+                <groupId>pro.fessional</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+
+            <!-- io常用工具类 -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
+
+            <!-- excel工具 -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+
+            <!-- 代码生成使用模板 -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+
+            <!-- JSON 解析器和生成器 -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+
+            <!-- JWT -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <!-- 线程传递值 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${transmittable-thread-local.version}</version>
+            </dependency>
+
+            <!-- 核心模块 -->
+            <dependency>
+                <groupId>com.upweup</groupId>
+                <artifactId>uwu-common-core</artifactId>
+                <version>${upweup.version}</version>
+            </dependency>
+
+<!--            &lt;!&ndash; 通信模块 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.upweup</groupId>-->
+<!--                <artifactId>uwu-common-web</artifactId>-->
+<!--                <version>${upweup.version}</version>-->
+<!--            </dependency>-->
+
+<!--            &lt;!&ndash; 接口模块 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.upweup</groupId>-->
+<!--                <artifactId>uwu-common-swagger</artifactId>-->
+<!--                <version>${xueyi.version}</version>-->
+<!--            </dependency>-->
+
+<!--            &lt;!&ndash; 安全模块 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.upweup</groupId>-->
+<!--                <artifactId>uwu-common-security</artifactId>-->
+<!--                <version>${upweup.version}</version>-->
+<!--            </dependency>-->
+
+<!--            &lt;!&ndash; 权限范围 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.upweup</groupId>-->
+<!--                <artifactId>uwu-common-datascope</artifactId>-->
+<!--                <version>${upweup.version}</version>-->
+<!--            </dependency>-->
+
+<!--            &lt;!&ndash; 多数据源 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.upweup</groupId>-->
+<!--                <artifactId>uwu-common-datasource</artifactId>-->
+<!--                <version>${upweup.version}</version>-->
+<!--            </dependency>-->
+
+<!--            &lt;!&ndash; 日志记录 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.upweup</groupId>-->
+<!--                <artifactId>uwu-common-log</artifactId>-->
+<!--                <version>${upweup.version}</version>-->
+<!--            </dependency>-->
+
+<!--            &lt;!&ndash; 缓存管理 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.upweup</groupId>-->
+<!--                <artifactId>uwu-common-cache</artifactId>-->
+<!--                <version>${upweup.version}</version>-->
+<!--            </dependency>-->
+
+<!--            &lt;!&ndash; 缓存服务 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.upweup</groupId>-->
+<!--                <artifactId>uwu-common-redis</artifactId>-->
+<!--                <version>${upweup.version}</version>-->
+<!--            </dependency>-->
+
+<!--            &lt;!&ndash; 分布式事务 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.upweup</groupId>-->
+<!--                <artifactId>uwu-common-seata</artifactId>-->
+<!--                <version>${upweup.version}</version>-->
+<!--            </dependency>-->
+
+<!--            &lt;!&ndash; 系统接口 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.upweup</groupId>-->
+<!--                <artifactId>uwu-api-system</artifactId>-->
+<!--                <version>${upweup.version}</version>-->
+<!--            </dependency>-->
+
+<!--            &lt;!&ndash; 租管接口 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.upweup</groupId>-->
+<!--                <artifactId>uwu-api-tenant</artifactId>-->
+<!--                <version>${upweup.version}</version>-->
+<!--            </dependency>-->
+
+<!--            &lt;!&ndash; 文件管理接口 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.upweup</groupId>-->
+<!--                <artifactId>uwu-api-file</artifactId>-->
+<!--                <version>${upweup.version}</version>-->
+<!--            </dependency>-->
+
+<!--            &lt;!&ndash; 定时任务接口 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.upweup</groupId>-->
+<!--                <artifactId>uwu-api-job</artifactId>-->
+<!--                <version>${upweup.version}</version>-->
+<!--            </dependency>-->
+
+            <!-- huTool 工具类库 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-bom</artifactId>
+                <version>${hutool.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-core</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- bootstrap 启动器 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
+<!--                    <source>${java.version}</source>-->
+<!--                    <target>${java.version}</target>-->
+<!--                    <annotationProcessorPaths>-->
+<!--                        <path>-->
+<!--                            <groupId>org.mapstruct</groupId>-->
+<!--                            <artifactId>mapstruct-processor</artifactId>-->
+<!--                            <version>${mapstruct.version}</version>-->
+<!--                        </path>-->
+<!--                        <path>-->
+<!--                            <groupId>org.projectlombok</groupId>-->
+<!--                            <artifactId>lombok</artifactId>-->
+<!--                            <version>${lombok.version}</version>-->
+<!--                        </path>-->
+<!--                        <path>-->
+<!--                            <groupId>org.projectlombok</groupId>-->
+<!--                            <artifactId>lombok-mapstruct-binding</artifactId>-->
+<!--                            <version>${lombok-mapstruct-binding.version}</version>-->
+<!--                        </path>-->
+<!--                    </annotationProcessorPaths>-->
+<!--                    <encoding>${project.build.sourceEncoding}</encoding>-->
+                </configuration>
+            </plugin>
+        </plugins>
+<!--        <pluginManagement>-->
+<!--            <plugins>-->
+<!--                <plugin>-->
+<!--                    <groupId>org.springframework.boot</groupId>-->
+<!--                    <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                    <version>${spring-boot.version}</version>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <goals>-->
+<!--                                <goal>repackage</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                </plugin>-->
+<!--            </plugins>-->
+<!--        </pluginManagement>-->
+    </build>
+
+    <repositories>
+        <repository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>
