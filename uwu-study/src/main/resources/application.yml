@@ -1,26 +1,11 @@
 spring:
-#  application:
-#    name: uwu-study
-#  datasource:
-#    url: jdbc:mysql://120.46.180.172:3306/misc?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false
-#    username: root
-#    password: 7s*SK%e%HJ#a0
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-  shardingsphere:
-    sharding:
-      tables:
-        user:
-          logicTable: user # 逻辑表名称，所有的子表的基础表，子表需要根据逻辑表机构动态复制产生真实的存储数据的表。
-          actualDataNodes: command-center.t_student_${2023..2024}${(1..12).collect{t -> t.toString().padLeft(2, '0')}}
-          keyGenerator:
-            column: guid
-            type: CommandIdSeq
-          table-strategy:
-            complex:
-              # 告诉sharding以那些字段作为分表字段，多个子u但以逗号分隔，在CRUD操作中如果包含分表字段中的某一个，sharding就会使用自定义算法查找指定表查询，否则就查询所有子表。
-              sharding-columns: guid,create_time
-              #根据分库分表类型指定自定义分表算法类，如果自定义分表类继承了增加BaseXXXXAlgorithm基础类，此逻辑中无须事先建立所有分表
-              algorithm-class-name: com.example.demo.configure.CommandComplexKeysAlgorithmConfiguration
+  application:
+    name: uwu-study
+  datasource:
+    url: jdbc:mysql://120.46.180.172:3306/misc?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: 7s*SK%e%HJ#a0
+    driver-class-name: com.mysql.cj.jdbc.Driver
 #  cloud:
 #    nacos:
 #      discovery:
@@ -51,4 +36,4 @@ spring:
 #    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
 
 server:
-  port: 8001
+  port: 8010
