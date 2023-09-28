@@ -5,7 +5,7 @@ spring:
     name: uwu-study-db
   shardingsphere:
     datasource:
-      names: m1,m2,m3
+      names: m1,m2
       m1: # 主表
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -18,47 +18,19 @@ spring:
         url: jdbc:mysql://47.109.44.114:3306/uwu_test_2?Encoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false
         username: root
         password: Water123
-      m3: # 从表
-        type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://47.109.44.114:3306/uwu_test_3?Encoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false
-        username: root
-        password: Water123
-
 
     sharding:
-      master-slave-rules:  # 读写分离配置
-        ds0: # 读写分离名称
-          load-balance-algorithm-type: ROUND_ROBIN  #读复制均衡规则，ROUND_ROBIN：轮询，RANDOM：随机 ，WEIGHT：权重
-          master-data-source-name: m1 #主表
-          slave-data-source-names: #从表
-            - m2
-            - m3
+      broadcast-tables: dict_type,dict_value #广播表，所有数据库的的相关表都执行，要保证所有库中都有相关表，不然会报错
       tables:
-        dict_type:
-          actual-data-nodes: ds0.dict_type
+        user: # 逻辑表名为“user”
+          actual-data-nodes: m$->{1..2}.user_$->{1..2}  #逻辑表对应的真实表放在m0.user_1和m0.user_2中 csp_custmer_
           key-generator:
-            column: id
-            type: SNOWFLAKE
-            
-#          table-strategy:
-#            inline: # 指支持“=”和“in”
-#              sharding-column: id
-#              algorithm-expression: dict_type
-
-
-
-    #      broadcast-tables: dict_type,dict_value #广播表，所有数据库的的相关表都执行，要保证所有库中都有相关表，不然会报错
-#      tables:
-#        user: # 逻辑表名为“user”
-#          actual-data-nodes: m$->{1..2}.user_$->{1..2}  #逻辑表对应的真实表放在m0.user_1和m0.user_2中 csp_custmer_
-#          key-generator:
-#            column: user_id
-#            type: SNOWFLAKE #user_id类型为雪花算法
-#            props:
-#              worker:
-#                id: 1
-#          table-strategy: # 分表
+            column: user_id
+            type: SNOWFLAKE #user_id类型为雪花算法
+            props:
+              worker:
+                id: 1
+          table-strategy: # 分表
 #            inline: #不支持范围查询（between）
 #              sharding-column: user_id # 分片建，按照那个建进行分片
 #              algorithm-expression: user_$->{user_id%2+1}
@@ -69,26 +41,26 @@ spring:
 #            complex: #支持组合查询
 #              sharding-columns: user_id,phone
 #              algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterComplexTablesShardingAlgorithm
-#            hint:
-#              algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterHintTablesShardingAlgorithm
-#
-#
-#          database-strategy: # 分库
+            hint:
+              algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterHintTablesShardingAlgorithm
+
+
+          database-strategy: # 分库
 #            inline:
 #              sharding-column: user_id
 #              algorithm-expression: m$->{user_id%2+1}
-#            standard: #支持范围查询，
-#              sharding-column: user_id
-#              range-algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterRangeDBShardingAlgorithm
-#              precise-algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterPreciseDBShardingAlgorithm
-#        dict_type:
-#          key-generator:
-#            column: id
-#            type: SNOWFLAKE
-#        dict_value:
-#          key-generator:
-#            column: id
-#            type: SNOWFLAKE
+            standard: #支持范围查询，
+              sharding-column: user_id
+              range-algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterRangeDBShardingAlgorithm
+              precise-algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterPreciseDBShardingAlgorithm
+        dict_type:
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+        dict_value:
+          key-generator:
+            column: id
+            type: SNOWFLAKE
 
 
 

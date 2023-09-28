@@ -1,13 +1,19 @@
 package com.uwu.study.db;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.uwu.study.db.shardingspheredemo.entity.DictType;
+import com.uwu.study.db.shardingspheredemo.entity.DictValue;
 import com.uwu.study.db.shardingspheredemo.entity.User;
+import com.uwu.study.db.shardingspheredemo.mapper.DictTypeMapper;
+import com.uwu.study.db.shardingspheredemo.mapper.DictValueMapper;
 import com.uwu.study.db.shardingspheredemo.mapper.UserMapper;
 import org.apache.shardingsphere.api.hint.HintManager;
+import org.bouncycastle.asn1.ocsp.CertID;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -19,6 +25,12 @@ public class ShardingJDBCTest {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private DictTypeMapper dictTypeMapper;
+
+    @Resource
+    private DictValueMapper dictValueMapper;
 
     @Test
     public void addUser(){
@@ -89,6 +101,61 @@ public class ShardingJDBCTest {
 
         hintManager.close();//保证线程安全，用完后关闭
 
+    }
+
+    @Test
+    public void addDictType(){
+        DictType dictType = new DictType();
+        dictType.setTypeCode("language");
+        dictType.setTypeStatus(0);
+        dictType.setCreator("system");
+        dictType.setCreateTime(new Date());
+
+        dictTypeMapper.insert(dictType);
+
+        DictValue dictValue = new DictValue();
+        dictValue.setTypeCode("language");
+        dictValue.setValueCode("English");
+        dictValue.setValue("英语");
+        dictValue.setValueStatus(0);
+        dictValue.setSort(1);
+        dictValue.setCreator("system");
+        dictValue.setCreateTime(new Date());
+        dictValueMapper.insert(dictValue);
+
+        DictValue dictValue2 = new DictValue();
+        dictValue2.setTypeCode("language");
+        dictValue2.setValueCode("Chinese");
+        dictValue2.setValue("中文");
+        dictValue2.setValueStatus(0);
+        dictValue2.setSort(2);
+        dictValue2.setCreator("system");
+        dictValue2.setCreateTime(new Date());
+        dictValueMapper.insert(dictValue2);
+
+
+    }
+
+
+    @Test
+    public void addDictTypeForRWSplit(){
+        DictType dictType = new DictType();
+        dictType.setTypeCode("Education");
+        dictType.setTypeStatus(0);
+        dictType.setCreator("system");
+        dictType.setCreateTime(new Date());
+
+        dictTypeMapper.insert(dictType);
+
+    }
+
+    @Test
+    public void queryDictTypeForRWSplit(){
+
+        for(int i= 0;i<10;i++){
+            List<DictType> dictTypes = dictTypeMapper.selectList(null);
+            dictTypes.forEach(a-> System.out.println(a));
+        }
     }
 
 }
