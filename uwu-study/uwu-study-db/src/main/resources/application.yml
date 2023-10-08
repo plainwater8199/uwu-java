@@ -5,8 +5,8 @@ spring:
     name: uwu-study-db
   shardingsphere:
     datasource:
-      names: m1,m2,m3
-      m1: # 主表
+      names: m0,m2
+      m0: # 主表
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://47.109.44.114:3306/uwu_test_1?Encoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false
@@ -18,138 +18,30 @@ spring:
         url: jdbc:mysql://47.109.44.114:3306/uwu_test_2?Encoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false
         username: root
         password: Water123
-      m3: # 从表
-        type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://47.109.44.114:3306/uwu_test_3?Encoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false
-        username: root
-        password: Water123
-
-
     sharding:
-      master-slave-rules:  # 读写分离配置
-        ds0: # 读写分离名称
-          load-balance-algorithm-type: ROUND_ROBIN  #读复制均衡规则，ROUND_ROBIN：轮询，RANDOM：随机 ，WEIGHT：权重
-          master-data-source-name: m1 #主表
-          slave-data-source-names: #从表
-            - m2
-            - m3
       tables:
-        dict_type:
-          actual-data-nodes: ds0.dict_type
+        customer:
+          actual-data-nodes: m0.customer
           key-generator:
-            column: id
+            column: customer_id
             type: SNOWFLAKE
-            
-#          table-strategy:
-#            inline: # 指支持“=”和“in”
-#              sharding-column: id
-#              algorithm-expression: dict_type
-
-
-
-    #      broadcast-tables: dict_type,dict_value #广播表，所有数据库的的相关表都执行，要保证所有库中都有相关表，不然会报错
-#      tables:
-#        user: # 逻辑表名为“user”
-#          actual-data-nodes: m$->{1..2}.user_$->{1..2}  #逻辑表对应的真实表放在m0.user_1和m0.user_2中 csp_custmer_
-#          key-generator:
-#            column: user_id
-#            type: SNOWFLAKE #user_id类型为雪花算法
-#            props:
-#              worker:
-#                id: 1
-#          table-strategy: # 分表
-#            inline: #不支持范围查询（between）
-#              sharding-column: user_id # 分片建，按照那个建进行分片
-#              algorithm-expression: user_$->{user_id%2+1}
-#            standard: #支持范围查询
-#              sharding-column: user_id
-#              range-algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterRangeTablesShardingAlgorithm
-#              precise-algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterPreciseTablesShardingAlgorithm
-#            complex: #支持组合查询
-#              sharding-columns: user_id,phone
-#              algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterComplexTablesShardingAlgorithm
-#            hint:
-#              algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterHintTablesShardingAlgorithm
-#
-#
-#          database-strategy: # 分库
-#            inline:
-#              sharding-column: user_id
-#              algorithm-expression: m$->{user_id%2+1}
-#            standard: #支持范围查询，
-#              sharding-column: user_id
-#              range-algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterRangeDBShardingAlgorithm
-#              precise-algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterPreciseDBShardingAlgorithm
-#        dict_type:
-#          key-generator:
-#            column: id
-#            type: SNOWFLAKE
-#        dict_value:
-#          key-generator:
-#            column: id
-#            type: SNOWFLAKE
-
-
-
-
-
-
-
+          table-strategy: #分表
+            standard: #支持范围查询
+              sharding-column: customer_id
+              range-algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterRangeTablesShardingAlgorithm
+              precise-algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterPreciseTablesShardingAlgorithm
+        statistic:
+          actual-data-nodes: m2.statistic
+          key-generator:
+            column: customer_id
+            type: SNOWFLAKE
+          table-strategy: #分表
+            standard: #支持范围查询
+              sharding-column: customer_id
+              range-algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterRangeTablesShardingAlgorithm
+              precise-algorithm-class-name: com.uwu.study.db.shardingspheredemo.algorithm.WaterPreciseTablesShardingAlgorithm
     props:
       sql:
         show: true
-
-
-
-#  datasource:
-#    url: jdbc:mysql://47.109.44.114:3306/user?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false
-#    username: root
-#    password: Water123
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#  shardingsphere:
-#    sharding:
-#      tables:
-#        user:
-#          logicTable: user # 逻辑表名称，所有的子表的基础表，子表需要根据逻辑表机构动态复制产生真实的存储数据的表。
-#          actualDataNodes: command-center.t_student_${2023..2024}${(1..12).collect{t -> t.toString().padLeft(2, '0')}}
-#          keyGenerator:
-#            column: guid
-#            type: CommandIdSeq
-#          table-strategy:
-#            complex:
-#              # 告诉sharding以那些字段作为分表字段，多个子u但以逗号分隔，在CRUD操作中如果包含分表字段中的某一个，sharding就会使用自定义算法查找指定表查询，否则就查询所有子表。
-#              sharding-columns: guid,create_time
-#              #根据分库分表类型指定自定义分表算法类，如果自定义分表类继承了增加BaseXXXXAlgorithm基础类，此逻辑中无须事先建立所有分表
-#              algorithm-class-name: com.example.demo.configure.CommandComplexKeysAlgorithmConfiguration
-#  cloud:
-#    nacos:
-#      discovery:
-#        server-addr: ${NACOS_SERVER:http://nacos-old.5g-dev.echo-isoftstone.cn}
-#        namespace: ${NACOS_NAMESPACE:05a4b74a-59e0-4867-9faa-c05fdbf5180f}
-#        username: ${NACOS_USER:nacos}
-#        password: ${NACOS_PASSWORD:nacos}
-#      config:
-#        server-addr: ${NACOS_SERVER:http://nacos-old.5g-dev.echo-isoftstone.cn}
-#        file-extension: yaml
-#        group: DEFAULT_GROUP
-#        namespace: ${NACOS_NAMESPACE:05a4b74a-59e0-4867-9faa-c05fdbf5180f}
-#        username: ${NACOS_USER:nacos}
-#        password: ${NACOS_PASSWORD:nacos}
-#  config:
-#    import:
-#      - optional:nacos:misc-service.yaml
-#      - optional:nacos:nce-common.yaml
-#      - optional:nacos:sentinel-circuitbreaker-rules.yml
-
-#mybatis-plus:
-#  global-config:
-#    db-config:
-#      logic-delete-field: deleted
-#      logic-not-delete-value: 0
-#      logic-delete-value: 1
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
-
 server:
   port: 8011

@@ -32,6 +32,14 @@ public class ShardingJDBCTest {
     @Resource
     private DictValueMapper dictValueMapper;
 
+
+
+    @Test
+    public void count(){
+        System.out.println(userMapper.count());
+    }
+
+
     @Test
     public void addUser(){
         for(int i = 0;i<10;i++){
