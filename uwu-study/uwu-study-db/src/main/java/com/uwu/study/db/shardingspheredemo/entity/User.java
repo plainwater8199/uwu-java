@@ -1,10 +1,12 @@
 package com.uwu.study.db.shardingspheredemo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
+@TableName("user")
 public class User {
 
     private Long userId;

@@ -1,4 +1,4 @@
-package com.uwu.study.db.test;
+package com.uwu.user.test;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @Slf4j
-public class TestDBController {
-    @RequestMapping(value = "/testDBCall")
-    public void apiCall(HttpServletRequest request, HttpServletResponse response){
+public class TestController {
 
+    @RequestMapping(value = "/user/test")
+    public void userTest(HttpServletRequest request, HttpServletResponse response){
         System.out.println("123");
     }
 }

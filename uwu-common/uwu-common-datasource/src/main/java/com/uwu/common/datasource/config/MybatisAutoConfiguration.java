@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 
 /**
  * @Author: lidingyi
- * @Contact: dylicr@isoftstone.com
  * @Date: 2022/4/25 11:21
  * @Version: 1.0
  * @Description:
