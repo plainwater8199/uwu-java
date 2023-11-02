@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ *  https://blog.csdn.net/ctwy291314/article/details/129755565
+ */
 @Slf4j
 @RestController
 public class RocketMqSendController {
