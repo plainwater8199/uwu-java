@@ -1,7 +1,7 @@
 package com.uwu.study.db.shardingspheredemo.service.impl;
 
-import com.uwu.study.db.shardingspheredemo.entity.User;
-import com.uwu.study.db.shardingspheredemo.mapper.UserMapper;
+import com.uwu.study.db.info.entity.UserDo;
+import com.uwu.study.db.info.dao.UserDao;
 import com.uwu.study.db.shardingspheredemo.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,11 +14,11 @@ import java.util.Random;
 public class UserServiceImpl implements UserService {
 
     @Resource
-    private UserMapper userMapper;
+    private UserDao userMapper;
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void createUser() {
-        User user = new User();
+        UserDo user = new UserDo();
         user.setUserId(Long.valueOf(randomID(10)));
         user.setName("water");
         user.setPhone(18100000001L);

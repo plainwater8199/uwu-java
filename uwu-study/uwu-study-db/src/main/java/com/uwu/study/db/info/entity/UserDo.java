@@ -1,4 +1,4 @@
-package com.uwu.study.db.shardingspheredemo.entity;
+package com.uwu.study.db.info.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 @TableName("user")
-public class User {
+public class UserDo {
 
     private Long userId;
 

@@ -1,9 +1,9 @@
-package com.uwu.study.db.shardingspheredemo.entity;
+package com.uwu.study.db.info.entity;
 
 import lombok.Data;
 
 @Data
-public class Statistic {
+public class StatisticDo {
     private Long id;
     private Long customerId;
     private String data;

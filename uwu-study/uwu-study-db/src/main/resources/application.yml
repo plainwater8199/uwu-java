@@ -50,8 +50,7 @@ spring:
               algorithmClassName: com.uwu.study.db.shardingspheredemo.shardingsphere521.algorithm.UserShardingAlgorithms
 
     props:
-      sql:
-        show: true
+      sql-show: true
 server:
   port: 8011
 

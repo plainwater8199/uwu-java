@@ -1,4 +1,4 @@
-package com.uwu.study.db.shardingspheredemo.entity;
+package com.uwu.study.db.mybatis.vo;
 
 import lombok.Data;
 

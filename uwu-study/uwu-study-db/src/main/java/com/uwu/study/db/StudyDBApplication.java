@@ -5,7 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@MapperScan("com.uwu.study.db.shardingspheredemo.mapper")
+@MapperScan("com.**.dao.**")
 @SpringBootApplication
 public class StudyDBApplication {
     public static void main(String[] args) {

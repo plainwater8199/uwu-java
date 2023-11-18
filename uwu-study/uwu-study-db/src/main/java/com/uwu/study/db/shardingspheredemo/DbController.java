@@ -1,6 +1,6 @@
 package com.uwu.study.db.shardingspheredemo;
 
-import com.uwu.study.db.shardingspheredemo.mapper.CustomerMapper;
+import com.uwu.study.db.info.dao.CustomerDao;
 import com.uwu.study.db.shardingspheredemo.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 public class DbController {
 
     @Resource
-    private CustomerMapper userCustomerMapper;
+    private CustomerDao userCustomerMapper;
 
     @Resource
     private UserService userService;
