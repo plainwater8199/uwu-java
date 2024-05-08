@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: uwu-user
+  datasource:
+    url: jdbc:mysql://120.46.180.172:3306/misc?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: 7s*SK%e%HJ#a0
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: ${NACOS_SERVER:http://nacos-old.5g-dev.echo-isoftstone.cn}
+#        namespace: ${NACOS_NAMESPACE:05a4b74a-59e0-4867-9faa-c05fdbf5180f}
+#        username: ${NACOS_USER:nacos}
+#        password: ${NACOS_PASSWORD:nacos}
+#      config:
+#        server-addr: ${NACOS_SERVER:http://nacos-old.5g-dev.echo-isoftstone.cn}
+#        file-extension: yaml
+#        group: DEFAULT_GROUP
+#        namespace: ${NACOS_NAMESPACE:05a4b74a-59e0-4867-9faa-c05fdbf5180f}
+#        username: ${NACOS_USER:nacos}
+#        password: ${NACOS_PASSWORD:nacos}
+#  config:
+#    import:
+#      - optional:nacos:misc-service.yaml
+#      - optional:nacos:nce-common.yaml
+#      - optional:nacos:sentinel-circuitbreaker-rules.yml
+
+#mybatis-plus:
+#  global-config:
+#    db-config:
+#      logic-delete-field: deleted
+#      logic-not-delete-value: 0
+#      logic-delete-value: 1
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+
+server:
+  port: 8010
