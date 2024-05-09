@@ -3,7 +3,7 @@ package com.uwu.study.ajava8.stream;
 
 
 import cn.hutool.json.JSONUtil;
-import com.uwu.study.ajava8.stream.dto.DataItem;
+import com.uwu.study.ajava8.stream.dto.DataStreamItem;
 import com.uwu.study.ajava8.stream.dto.TestData;
 import com.uwu.study.ajava8.stream.dto.TodoItem;
 
@@ -17,17 +17,17 @@ public class DataFactory {
         throw new IllegalStateException("Utility class");
     }
 
-    public static List<DataItem> getTestData(int sum) {
-        List<DataItem> dataList = new ArrayList<>();
-        DataItem testData ;
+    public static List<DataStreamItem> getTestData(int sum) {
+        List<DataStreamItem> dataList = new ArrayList<>();
+        DataStreamItem testStreamData ;
         for(int id = 0; id <=sum ; id ++ ){
-            testData = new DataItem();
-            testData.setId(id);
-            testData.setName(obtainName());
-            testData.setAge(obtainAge());
-            testData.setTodoList(todoLists());
-            testData.setSuccess(isSuccess());
-            dataList.add(testData);
+            testStreamData = new DataStreamItem();
+            testStreamData.setId(id);
+            testStreamData.setName(obtainName());
+            testStreamData.setAge(obtainAge());
+            testStreamData.setTodoList(todoLists());
+            testStreamData.setSuccess(isSuccess());
+            dataList.add(testStreamData);
         }
         TestData data = new TestData();
         data.setDataItems(dataList);

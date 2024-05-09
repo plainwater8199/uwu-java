@@ -6,5 +6,5 @@ import java.util.List;
 
 @Data
 public class TestData {
-    private List<DataItem> dataItems;
+    private List<DataStreamItem> dataItems;
 }
