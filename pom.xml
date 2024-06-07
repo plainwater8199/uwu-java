@@ -10,9 +10,9 @@
 
     <modules>
         <module>uwu-common</module>
-        <module>uwu-study</module>
         <module>uwu-user</module>
         <module>uwu-order</module>
+        <module>uwu-study</module>
     </modules>
 
     <name>upweup</name>

@@ -1,7 +1,6 @@
 package com.uwu.study.handwriting.httpPool;
 
 
-import cn.hutool.log.Log;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
