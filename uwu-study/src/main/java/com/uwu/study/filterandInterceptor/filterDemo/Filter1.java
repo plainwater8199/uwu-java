@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.mvc.condition.ParamsRequestCondition;
 import org.springframework.web.servlet.mvc.condition.PathPatternsRequestCondition;
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
@@ -34,24 +35,17 @@ public class Filter1 implements Filter {
 
         RequestMappingHandlerMapping mapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
         Map<RequestMappingInfo, HandlerMethod> handlerMethods = mapping.getHandlerMethods();
-//        for(Map.Entry<RequestMappingInfo, HandlerMethod> entry: handlerMethods.entrySet()){
-//            RequestMappingInfo key = entry.getKey();
-//            if(key != null){
-//                PathPatternsRequestCondition pathPatternsCondition = key.getPathPatternsCondition();
-//                System.out.println(pathPatternsCondition);
-//                if(pathPatternsCondition != null){
-//                    System.out.println(pathPatternsCondition.getPatterns());
-//                    Set<PathPattern> patterns = pathPatternsCondition.getPatterns();
-//                    for(PathPattern item : patterns){
-//                        urls.add(item.getPatternString());
-//                    }
-//
-//                }
-//            }
-//        }
-        handlerMethods.forEach((x,y)->x.getPathPatternsCondition().getPatterns().forEach(c->urls.add(c.getPatternString())));
-        urls.forEach(System.out::println);
-
+        for(Map.Entry<RequestMappingInfo, HandlerMethod> entry: handlerMethods.entrySet()){
+            RequestMappingInfo key = entry.getKey();
+            if(key != null){
+                PatternsRequestCondition patternsCondition = key.getPatternsCondition();
+                if(patternsCondition != null){
+                    System.out.println(patternsCondition.getPatterns());
+                    Set<String> patterns = patternsCondition.getPatterns();
+                    urls.addAll(patterns);
+                }
+            }
+        }
 
         Filter.super.init(filterConfig);
     }
