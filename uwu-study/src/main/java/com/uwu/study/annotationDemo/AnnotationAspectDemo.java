@@ -19,13 +19,23 @@ public class AnnotationAspectDemo {
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-
+        Class<?> clazz = method.getDeclaringClass();
+        // 根据接口名称获取该接口对应类上的指定注解
+        if(clazz.isAnnotationPresent(TestAnnotation.class)){
+            TestAnnotation classAnnotation = clazz.getAnnotation(TestAnnotation.class);
+            String[] value = classAnnotation.value();
+            for(Object item : value){
+                System.out.println(item.toString());
+            }
+        }
+        // 获取接口上的指定注解
         TestAnnotation annotation = method.getAnnotation(TestAnnotation.class);
-        int[] value = annotation.value();
+        String[] value = annotation.value();
         for(Object item : value){
             System.out.println(item.toString());
             if("11111".equals(item.toString())){
-                throw new RuntimeException();
+                System.out.println("权限异常");
+                break;
             }
         }
 

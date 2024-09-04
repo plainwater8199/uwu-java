@@ -3,9 +3,9 @@ package com.uwu.study.annotationDemo;
 import java.lang.annotation.*;
 
 @Inherited
-@Target(ElementType.METHOD)
+@Target({ElementType.METHOD,ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TestAnnotation {
     //必填参数
-    int[] value() default {};
+    String[] value() default {};
 }

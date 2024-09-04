@@ -4,13 +4,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+@TestAnnotation(value = {"class","water"})
 @RestController
 @RequestMapping("/annotation")
 public class AnnotationController {
 
 
-    @TestAnnotation(value = {11111,22222})
+    @TestAnnotation(value = {"11111","22222"})
     @RequestMapping("/login")
     @ResponseBody
     public String login() {
