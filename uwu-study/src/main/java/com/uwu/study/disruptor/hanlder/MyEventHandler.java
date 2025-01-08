@@ -17,5 +17,14 @@ public class MyEventHandler implements EventHandler<MyEvent> {
     @Override
     public void onEvent(MyEvent event, long sequence, boolean endOfBatch) throws Exception {
         System.out.println(name + " received: " + event.getValue());
+        // 处理事件
+        // ...
+        Long value = event.getValue();
+        if (value % 2 == 0) {
+            System.out.println("休息了。。。。。。。。。。");
+            Thread.sleep(10000);
+        }
+        // 处理完成后，完成 Future
+        event.getFuture().complete(event.getValue()*2);
     }
 }
