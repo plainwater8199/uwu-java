@@ -31,7 +31,7 @@ public class Filter1 implements Filter {
     ApplicationContext applicationContext;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("-----------------Filter1 init--------------------");
+//        System.out.println("-----------------Filter1 init--------------------");
 
         RequestMappingHandlerMapping mapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
         Map<RequestMappingInfo, HandlerMethod> handlerMethods = mapping.getHandlerMethods();
@@ -52,26 +52,26 @@ public class Filter1 implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("-----------------Filter1 doFilter 前--------------------");
+//        System.out.println("-----------------Filter1 doFilter 前--------------------");
         String requestURI = ((HttpServletRequest) servletRequest).getRequestURI();
-        System.out.println("---------------"+requestURI);
+//        System.out.println("---------------"+requestURI);
         boolean isMatch = false;
         for(String urlPath : urls){
             if(pathMatcher.match(urlPath,requestURI)){
                 filterChain.doFilter(servletRequest,servletResponse);
-                System.out.println("-----------------Filter1 doFilter 后--------------------");
+//                System.out.println("-----------------Filter1 doFilter 后--------------------");
                 isMatch = true;
                 break;
             }
         }
         if(!isMatch){
-            System.out.println("++++++++++++++++++非法访问+++++++++++++++++++++++++++");
+//            System.out.println("++++++++++++++++++非法访问+++++++++++++++++++++++++++");
         }
     }
 
     @Override
     public void destroy() {
-        System.out.println("-----------------Filter1 destroy--------------------");
+//        System.out.println("-----------------Filter1 destroy--------------------");
         Filter.super.destroy();
     }
 }

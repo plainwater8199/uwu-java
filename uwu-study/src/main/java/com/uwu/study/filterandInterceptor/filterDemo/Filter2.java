@@ -13,20 +13,20 @@ import java.io.IOException;
 public class Filter2 implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("-----------------Filter2222222222 init--------------------");
+//        System.out.println("-----------------Filter2222222222 init--------------------");
         Filter.super.init(filterConfig);
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("-----------------Filter2222222222 doFilter 前--------------------");
+//        System.out.println("-----------------Filter2222222222 doFilter 前--------------------");
         filterChain.doFilter(servletRequest,servletResponse);
-        System.out.println("-----------------Filter2222222222 doFilter 后--------------------");
+//        System.out.println("-----------------Filter2222222222 doFilter 后--------------------");
     }
 
     @Override
     public void destroy() {
-        System.out.println("-----------------Filter2222222222 destroy--------------------");
+//        System.out.println("-----------------Filter2222222222 destroy--------------------");
         Filter.super.destroy();
     }
 }

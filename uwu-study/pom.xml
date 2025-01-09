@@ -263,6 +263,32 @@
         </dependency>
 
 
+        <!--   guava  Java 核心增强库，包含集合、并发原语、缓存、IO、反射等 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
+        </dependency>
+
+        <!-- 引入caffeine缓存 Caffeine是基于java8实现的新一代缓存工具，缓存性能接近理论最优-->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>2.5.5</version>
+        </dependency>
+
+        <!-- 引入ehcache缓存 纯Java的进程内缓存框架，具有快速、精干等特点，是Hibernate中默认的CacheProvider。同Caffeine和Guava Cache相比，Encache的功能更加丰富 -->
+        <!--   支持多种缓存淘汰算法，包括LRU、LFU和FIFO -->
+        <!--   缓存支持堆内存储、堆外存储、磁盘存储（支持持久化）三种 -->
+        <!--   支持多种集群方案，解决数据共享问题 -->
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>3.8.0</version>
+        </dependency>
+
+
+        <!-- 引入disruptor 高性能的事件驱动框架，用于构建高性能、低延迟的应用系统 -->
         <dependency>
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
