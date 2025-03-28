@@ -1,5 +1,7 @@
 package com.uwu.study.filterandInterceptor.filterDemo;
 
+import cn.hutool.json.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Order;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -14,10 +16,12 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 @Order(1)
 @Component
+@Slf4j
 @WebFilter(filterName = "Filter1",urlPatterns = "/**")
 public class Filter1 implements Filter {
     private static Set<String> urls = new HashSet<>();
@@ -61,6 +65,20 @@ public class Filter1 implements Filter {
         }
         if(!isMatch){
             System.out.println("++++++++++++++++++非法访问+++++++++++++++++++++++++++");
+            returnJson(servletResponse, 9999, "非法访问");
+        }
+    }
+
+    private void returnJson(ServletResponse response, int errorCode, String errorMessage) {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=utf-8");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.set("code", errorCode);
+        jsonObject.set("msg", errorMessage);
+        try (PrintWriter writer = response.getWriter()) {
+            writer.print(jsonObject);
+        } catch (IOException e) {
+            log.error("response error", e);
         }
     }
 
