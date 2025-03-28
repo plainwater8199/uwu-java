@@ -5,12 +5,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.mvc.condition.ParamsRequestCondition;
 import org.springframework.web.servlet.mvc.condition.PathPatternsRequestCondition;
-import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-import org.springframework.web.util.pattern.PathPattern;
 
 import javax.annotation.Resource;
 import javax.servlet.*;
@@ -38,11 +35,9 @@ public class Filter1 implements Filter {
         for(Map.Entry<RequestMappingInfo, HandlerMethod> entry: handlerMethods.entrySet()){
             RequestMappingInfo key = entry.getKey();
             if(key != null){
-                PatternsRequestCondition patternsCondition = key.getPatternsCondition();
-                if(patternsCondition != null){
-                    System.out.println(patternsCondition.getPatterns());
-                    Set<String> patterns = patternsCondition.getPatterns();
-                    urls.addAll(patterns);
+                PathPatternsRequestCondition pathPatternsCondition = key.getPathPatternsCondition();
+                if(pathPatternsCondition!= null){
+                    urls.addAll(pathPatternsCondition.getPatternValues());
                 }
             }
         }
@@ -65,7 +60,7 @@ public class Filter1 implements Filter {
             }
         }
         if(!isMatch){
-//            System.out.println("++++++++++++++++++非法访问+++++++++++++++++++++++++++");
+            System.out.println("++++++++++++++++++非法访问+++++++++++++++++++++++++++");
         }
     }
 

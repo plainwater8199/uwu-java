@@ -1,6 +1,19 @@
 spring:
   application:
     name: uwu-study
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/uwu?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
+    username: root
+    password: water123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: water123
+
+
   cloud:
     nacos:
       discovery:
@@ -21,6 +34,24 @@ spring:
       - optional:nacos:uwu-common.yaml
       - optional:nacos:uwu-study.yaml
 server:
-  port: 8012
+  port: 8889
 
+
+
+rocketmq:
+  name-server: 127.0.0.1:9876
+
+  producer:
+    group: uwu-water
+    send-message-timeout: 3000
+  multiTrigger:
+    group: tmp-tem-multi-triger-group
+    topic: tmp-tem-multi-triger-topic
+  #阅信配置
+  readingLetterPlus:
+    group: dev-tem-readingLetter-group
+    topic: dev-tem-readingLetter-topic
+  aimprivatenumber:
+    group: tmp-aimPrivateNumberGroup
+    topic: tmp-aimPrivateNumberTopic
 

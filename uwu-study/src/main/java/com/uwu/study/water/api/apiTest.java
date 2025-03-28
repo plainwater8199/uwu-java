@@ -1,45 +1,23 @@
-package com.uwu.user.test;
+package com.uwu.study.water.api;
+
+
 import com.alibaba.nacos.shaded.com.google.gson.Gson;
 import com.alibaba.nacos.shaded.com.google.gson.JsonObject;
-import com.uwu.user.test.vo.TestVO;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
-
-/**
- * @author jcrenc
- * @since 2024/2/28 9:32
- */
+import java.util.Map;
 
 @RestController
-public class TestController {
-
-//    @Resource
-//    private UwuOrderDao uwuOrderDao;
-//
-//    @RequestMapping("test")
-//    public String test() {
-//        LambdaQueryWrapper<UwuOrderDo> queryWrapper = new LambdaQueryWrapper<>();
-//        List<UwuOrderDo> uwuOrderDos = uwuOrderDao.selectList(queryWrapper);
-//        for (UwuOrderDo uwuOrderDo : uwuOrderDos) {
-//            System.out.println(uwuOrderDo);
-//        }
-//        System.out.println("test");
-//        return "test";
-//    }
-
-    @RequestMapping("test/dev")
-    public TestVO testDev() {
-        System.out.println("test");
-        TestVO testVO = new TestVO();
-        testVO.setCode(200);
-        return testVO;
-    }
+@RequestMapping("/api")
+public class apiTest {
 
     @PostMapping("/callback")
     public ApiResponse callback(ServletRequest servletRequest, ServletResponse servletResponse) {
@@ -61,6 +39,7 @@ public class TestController {
         }
         return new ApiResponse(200, "Success", result);
     }
+
 
     /**
      * 响应结果封装类
@@ -101,6 +80,9 @@ public class TestController {
             this.data = data;
         }
     }
+
+
+
 
 
 }
