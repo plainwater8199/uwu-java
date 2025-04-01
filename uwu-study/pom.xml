@@ -33,6 +33,14 @@
         </dependency>
 
 
+<!--        implementation("io.github.resilience4j:resilience4j-spring-boot2:1.7.1") // Resilience4j 依赖-->
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-spring-boot2</artifactId>
+            <version>1.7.1</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -299,6 +307,13 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>5.2.2</version> <!-- 使用适合你项目的版本 -->
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+            <version>2.6.15</version>
         </dependency>
 
     </dependencies>

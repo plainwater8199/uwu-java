@@ -13,6 +13,22 @@ spring:
     port: 6379
     password: water123
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbit
+    password: rabbit
+    virtual-host: /
+    # 可选配置
+    connection-timeout: 5000
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000
+        max-interval: 10000
+        multiplier: 2.0
+        max-attempts: 3
+
 
   cloud:
     nacos:
@@ -36,7 +52,10 @@ spring:
 server:
   port: 8889
 
-
+redis:
+  request.channel: async.request
+  response.channel: async.response
+  timeout.seconds: 5
 
 rocketmq:
   name-server: 127.0.0.1:9876
