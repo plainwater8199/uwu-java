@@ -51,7 +51,12 @@ public class Filter1 implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-//        System.out.println("-----------------Filter1 doFilter 前--------------------");
+        filterChain.doFilter(servletRequest,servletResponse);
+
+        /*
+
+
+        //        System.out.println("-----------------Filter1 doFilter 前--------------------");
         String requestURI = ((HttpServletRequest) servletRequest).getRequestURI();
 //        System.out.println("---------------"+requestURI);
         boolean isMatch = false;
@@ -67,6 +72,9 @@ public class Filter1 implements Filter {
             System.out.println("++++++++++++++++++非法访问+++++++++++++++++++++++++++");
             returnJson(servletResponse, 9999, "非法访问");
         }
+
+
+         */
     }
 
     private void returnJson(ServletResponse response, int errorCode, String errorMessage) {

@@ -316,6 +316,14 @@
             <version>2.6.15</version>
         </dependency>
 
+
+        <!-- 前端交互可能需要 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>2.6.15</version>
+        </dependency>
+
     </dependencies>
 
 </project>
