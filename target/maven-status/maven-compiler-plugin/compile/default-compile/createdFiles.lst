@@ -1,0 +1,10 @@
+com/handwritten/spring/core/BeanDefinition.class
+com/handwritten/demo/service/UserService.class
+com/handwritten/demo/repository/UserRepository.class
+com/handwritten/spring/annotation/ComponentScan.class
+com/handwritten/spring/annotation/Component.class
+com/handwritten/spring/context/ApplicationContext.class
+com/handwritten/demo/SpringDemo.class
+com/handwritten/spring/annotation/Autowired.class
+com/handwritten/spring/context/AnnotationConfigApplicationContext.class
+com/handwritten/demo/config/AppConfig.class

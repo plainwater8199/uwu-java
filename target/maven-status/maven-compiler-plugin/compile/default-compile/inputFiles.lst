@@ -1,0 +1,10 @@
+/workspace/src/main/java/com/handwritten/demo/SpringDemo.java
+/workspace/src/main/java/com/handwritten/demo/repository/UserRepository.java
+/workspace/src/main/java/com/handwritten/demo/service/UserService.java
+/workspace/src/main/java/com/handwritten/spring/annotation/Component.java
+/workspace/src/main/java/com/handwritten/spring/context/AnnotationConfigApplicationContext.java
+/workspace/src/main/java/com/handwritten/demo/config/AppConfig.java
+/workspace/src/main/java/com/handwritten/spring/context/ApplicationContext.java
+/workspace/src/main/java/com/handwritten/spring/annotation/ComponentScan.java
+/workspace/src/main/java/com/handwritten/spring/annotation/Autowired.java
+/workspace/src/main/java/com/handwritten/spring/core/BeanDefinition.java
